@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 import logo from '../Images/logo_fh.png';
 
 const Navbar = () => {
@@ -15,10 +16,10 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex space-x-6 justify-between items-center">
-          <a href="home" className="hover:text-blue-400">Home</a>
-          <a href="about" className="hover:text-blue-400">About</a>
-          <a href="projects" className="hover:text-blue-400">Projects</a>
-          <a href="contact" className="hover:text-blue-400">Contact</a>
+          <Link to="/home" className="hover:text-blue-400">Home</Link>
+          <Link to="/about" className="hover:text-blue-400">About</Link>
+          <Link to="/projects" className="hover:text-blue-400">Projects</Link>
+          <Link to="/contact" className="hover:text-blue-400">Contact</Link>
         </div>
 
         {/* Mobile */}
@@ -33,10 +34,10 @@ const Navbar = () => {
       {/* Mobile Links */}
       {isOpen && (
         <div className="md:hidden bg-gray-700 p-4">
-          <a href="home" className="block py-2 hover:text-blue-400">Home</a>
-          <a href="about" className="block py-2 hover:text-blue-400">About</a>
-          <a href="services" className="block py-2 hover:text-blue-400">Services</a>
-          <a href="contact" className="block py-2 hover:text-blue-400">Contact</a>
+          <Link to="/home" className="block py-2 hover:text-blue-400">Home</Link>
+          <Link to="/about" className="block py-2 hover:text-blue-400">About</Link>
+          <Link to="/projects" className="block py-2 hover:text-blue-400">Projects</Link>
+          <Link to="/Contact" className="block py-2 hover:text-blue-400">Contact</Link>
         </div>
       )}
     </nav>
