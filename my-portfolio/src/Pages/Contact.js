@@ -1,6 +1,33 @@
 import React from "react";
 
 function Contact() {
+
+  const [result, setResult] = React.useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "2e627c7a-494c-467f-ad4a-c6e5ea2e7d68");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Form Submitted Successfully, I will get back to you soon!");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
+    }
+  };
+
+
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-cyan-500 to-blue-500 flex flex-col items-center py-10">
       {/* Page Heading */}
@@ -76,20 +103,23 @@ function Contact() {
         </div>
 
         {/* Contact Form */}
-        <form className="bg-white text-black p-8 rounded-lg shadow-lg space-y-4 animate-fade-in">
+        <form className="bg-white text-black p-8 rounded-lg shadow-lg space-y-4 animate-fade-in" onSubmit={onSubmit}>
           <h2 className="text-3xl font-bold text-center mb-4">Send a Message</h2>
           <input
             type="text"
+            name="name"
             placeholder="Your Name"
             className="w-full px-4 py-2 rounded-lg border"
           />
           <input
             type="email"
+            name="email"
             placeholder="Your Email"
             className="w-full px-4 py-2 rounded-lg border"
           />
           <textarea
             placeholder="Your Message"
+            name="message"
             className="w-full px-4 py-2 rounded-lg border"
             rows="4"
           ></textarea>
@@ -98,7 +128,8 @@ function Contact() {
             className="bg-gradient-to-br from-pink-700 to-orange-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-6 py-4 text-center me-2 mb-2 mt-6 w-full hover:from-pink-700 hover:to-orange-600 transition-transform duration-200 transform hover:scale-105 text-white"
           >
             Send Message
-          </button>
+          </button> <br></br>
+          <span>{result}</span>
         </form>
       </div>
     </div>
